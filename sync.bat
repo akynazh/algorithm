@@ -1,1 +1,0 @@
-mgit -d algorithm -ps
