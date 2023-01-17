@@ -1,8 +1,15 @@
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 public class TestJava  {
 
     public static void main(String[] args) {
+
+    }
+
+    @Test
+    public void test1() {
         ArrayList<String> list = new ArrayList<>();
         list.add("hello");
         System.out.println(list.toString());

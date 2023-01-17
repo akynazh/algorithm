@@ -1,0 +1,6 @@
+.idea
+/test/java/out
+# /test/java/target
+*.iml
+
+*.exe

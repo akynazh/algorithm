@@ -36,7 +36,6 @@ void Dijkstra_optimise(int s) {
 		// 通过堆优化直接获得了目标 
 		min_cost = p.first;
 		k = p.second;
-		// 若已经有更短的路径则不更新 
 		if (min_cost > d[k]) continue;
 		visited[k] = 1;
 		for (int i = 0; i < V; i++) {
@@ -85,5 +84,3 @@ int main() {
 
 0 3 2 5 4 11
 */
-
-
