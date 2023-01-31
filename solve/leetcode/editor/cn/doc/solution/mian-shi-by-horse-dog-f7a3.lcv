@@ -1,0 +1,105 @@
+**解题思路**
+- 本文不采取有限状态机的方式，思路类似于语法分析，条理清晰，执行高效。
+- 将大问题化解为多个小问题的组合，实现解析一个整数、小数等小功能，再进行组合即可。
+
+**语法分析**
+记题目要求的表示数值的表达式为 arithmic，`?`代表出现0次或一次，紧跟在一个表达式后面的`+` (也就是说前面不是空格的`+`)代表出现一次或多次，`*`代表出现0次或多次，`\0` 代表 c语言风格字符串的结尾。按如下一步一步剖析即可：
+- arithmic = {space}* + {numeric} + {exp}? + {space}* + '\0'
+- numeric = {decimal} | {integer}
+- exp = ('e' | 'E') + {integer}
+- decimal = ('+' | '-')? + (.{number} | {number}.{number} | {number.})
+- integer = ('+' | '-')? + {number}
+- number = '[0~9]'+
+
+**唯一注意点**
+- 上面的思路已经很清楚明白了，唯一需要注意的就是 或表达式里面，例如 numeric = {decimal} | {integer}，不能更换顺序变为：numeric = {integer} ｜ {decimal}。想想这是为什么 👀。
+
+**代码实现**
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    bool isNumber(string s) {
+        const char* context = s.c_str();
+        return is_arithmic(context);
+    }
+
+    // arithmic = {space}* + {numeric} + {exp}? + {space}* + '\0'
+    bool is_arithmic(const char* ctx) {
+        skip_space(ctx);
+        if (parse_numeric(ctx) == false) 
+            return false;
+        if (*ctx == 'e' || *ctx == 'E')
+            if (parse_exp(ctx) == false) 
+                return false;
+        skip_space(ctx);
+        return *ctx == '\0';
+    }
+
+    void skip_space(const char*& ctx) {
+        while (*ctx == ' ')
+            ++ctx;
+    }
+
+    // numeric = {decimal} | {integer}
+    bool parse_numeric(const char*& ctx) {
+        const char* pre_ctx = ctx;
+        if (parse_decimal(ctx))
+            return true;
+        ctx = pre_ctx;
+        return parse_integer(ctx);
+    }
+
+    // integer = ('+' | '-')? + {number}
+    bool parse_integer(const char*& ctx) {
+        if (*ctx == '+' || *ctx == '-')
+            ++ctx;
+        return parse_number(ctx);
+    }
+
+    // decimal = ('+' | '-')? + (.{number} | {number}.{number} | {number.})
+    bool parse_decimal(const char*& ctx) {
+        if (*ctx == '+' || *ctx == '-')
+            ++ctx;
+        if (*ctx == '.') {
+            // '.' + number
+            ++ctx;
+            return parse_number(ctx);
+        } else {
+            if (parse_number(ctx) == false)
+                return false;
+            if (*ctx != '.')
+                return false;
+            ++ctx;
+            const char* pre_ctx = ctx;
+            if (parse_number(ctx) == false)
+                ctx = pre_ctx;
+            return true;
+        }
+    }
+
+    // number = '[0~9]'+
+    bool parse_number(const char*& ctx) {
+        if (*ctx < '0' || *ctx > '9')
+            return false;
+        while (*ctx >= '0' && *ctx <= '9')
+            ++ctx;
+        return true;
+    }
+
+    // exp = ('e' | 'E') + {integer}
+    bool parse_exp(const char*& ctx) {
+        if (*ctx != 'e' && *ctx != 'E')
+            return false;
+        ++ctx;
+        return parse_integer(ctx);
+    }
+};
+```
+
+***提交结果***
+- 时间消耗：0ms
+- 内存消耗：6MB
+
