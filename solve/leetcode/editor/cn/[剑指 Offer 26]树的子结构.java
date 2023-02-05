@@ -72,5 +72,13 @@ class Solution {
             return solve(A.left, originB) || solve(A.right, originB);
         }
     }
+    public boolean isSubStructureOther(TreeNode A, TreeNode B) {
+        return (A != null && B != null) && ((solveOther(A, B) || isSubStructureOther(A.left, B) || isSubStructureOther(A.right, B)));
+    }
+    public boolean solveOther(TreeNode A, TreeNode B) {
+        if (B == null) return true;
+        if (A == null || A.val != B.val) return false;
+        return solveOther(A.left, B.left) && solveOther(A.right, B.right);
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
