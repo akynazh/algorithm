@@ -42,7 +42,31 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-
+        TreeNode originRoot = copyTree(root);
+        getMirror(root);
+        return judge(originRoot, root);
+    }
+    public TreeNode copyTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode node = new TreeNode(root.val);
+        if (root.left != null) node.left = copyTree(root.left);
+        if (root.right != null) node.right = copyTree(root.right);
+        return node;
+    }
+    public void getMirror(TreeNode root) {
+        if (root == null) return;
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+        getMirror(root.left);
+        getMirror(root.right);
+    }
+    public boolean judge(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) return true;
+        return t1 != null && t2 != null
+                && t1.val == t2.val
+                && judge(t1.left, t2.left)
+                && judge(t1.right, t2.right);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
