@@ -1,4 +1,4 @@
-package interview.xiaohongshu.p2;
+package interview.xiaohongshu.t1.p2;
 
 import java.util.ArrayList;
 import java.util.Arrays;

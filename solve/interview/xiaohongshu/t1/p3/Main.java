@@ -1,4 +1,4 @@
-package interview.xiaohongshu.p3;
+package interview.xiaohongshu.t1.p3;
 
 import java.util.Scanner;
 
