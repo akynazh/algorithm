@@ -1,4 +1,4 @@
-package interview.xiaohongshu.t2.p1.p2;
+package interview.xiaohongshu.t2.p1;
 
 /**
  * @Author jiangzhh
