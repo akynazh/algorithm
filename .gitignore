@@ -2,5 +2,6 @@
 *.iml
 *.exe
 *.class
-/solve/leetcode
-!/solve/leetcode/editor/cn/doc/note/*
+/solve/leetcode/editor/cn/doc/content
+/solve/leetcode/editor/cn/doc/solution
+/solve/leetcode/editor/cn/doc/submission
