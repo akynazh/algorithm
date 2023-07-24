@@ -1,5 +1,3 @@
-package interview.xiaohongshu.t2.p2;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,9 +24,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt(), k = sc.nextInt();
         List<Integer> arr = new ArrayList<>();
-        arr.add(k);
+        int cv = k;
+        arr.add(cv);
         while (--n != 0) {
-            arr.add(n + k);
+            cv += k;
+            arr.add(cv);
         }
         int s = 0;
         for (Integer v : arr) {

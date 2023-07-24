@@ -1,6 +1,6 @@
 .idea
-/test/java/out
-# /test/java/target
 *.iml
-
 *.exe
+*.class
+/solve/leetcode
+!/solve/leetcode/editor/cn/doc/note
