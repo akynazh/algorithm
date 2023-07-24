@@ -3,4 +3,4 @@
 *.exe
 *.class
 /solve/leetcode
-!/solve/leetcode/editor/cn/doc/note
+!/solve/leetcode/editor/cn/doc/note/*
