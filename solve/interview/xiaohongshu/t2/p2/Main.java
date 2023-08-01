@@ -1,3 +1,5 @@
+package interview.xiaohongshu.t2.p2;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
