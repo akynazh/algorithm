@@ -47,7 +47,28 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int reverse(int x) {
-
+        if (x == 0) return 0;
+        String st = String.valueOf(x);
+        StringBuilder sb = new StringBuilder();
+        if (st.charAt(0) == '-') {
+            sb.append('-');
+            st = st.substring(1);
+        }
+        StringBuilder sb1 = new StringBuilder(st);
+        StringBuilder sb2 = sb1.reverse();
+        String st1 = sb2.toString();
+        int idx = -1;
+        for (int i = 0; i < st1.length() && st1.charAt(i) == '0'; i++) {
+            idx = i;
+        }
+        if (idx != -1) {
+            st1 = st1.substring(idx + 1);
+        }
+        long k = Long.valueOf(st1);
+        if (sb.toString() == "-" && k > 2147483648L) return 0;
+        if (sb.toString() != "-" && k > 2147483647L) return 0;
+        StringBuilder res = sb.append(st1);
+        return Integer.valueOf(res.toString());
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
