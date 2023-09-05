@@ -1,0 +1,31 @@
+每个数字字符宽度都补成当前位数i, 那么返回下标k//i的数 的 第 k%i 位即可
+例如i为3时，数字序列补为 000 001 002 003 004 005 006 007 008 009 010 011...
+前面补0后n要右移对应的长度
+
+* []
+
+```python
+class Solution:
+    def findNthDigit(self, k):
+        i = 1
+        while i * (10 ** i) < k:
+            k += 10 ** i 
+            i += 1
+        return int(str(k//i)[k % i])
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    int getKthNum(long k) {
+        for (int i = 1;; i++) {
+            if (i * pow(10, i) > k)
+                return to_string(k / i)[k % i] - '0';
+            k += pow(10, i);
+		}
+    }
+};
+```
+

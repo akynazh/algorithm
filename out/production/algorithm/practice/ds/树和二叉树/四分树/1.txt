@@ -1,0 +1,12 @@
+3
+ppeeefpffeefe
+pefepeefe
+peeef
+peefe
+peeef
+peepefefe
+
+Output
+There  are  640  black  pixels.
+There  are  512  black  pixels.
+There  are  384  black  pixels.

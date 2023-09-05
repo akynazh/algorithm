@@ -1,0 +1,67 @@
+### 思路
+
+1. n对括号，相对应的有2*n个位置可供我们选择"("或者是")"进行填充。
+2. 有效括号的前置条件，即必须满足“括号消除”（左右括号必须配对）的性质。特殊条件限制：
+   2.1 第一个位置0必须为"("，且最后一个位置2*n-1必须为")",否则括号无法消除
+   2.2  括号数量使用的限制n对括号，自然有 n个"(" 和 n个")",数量达到限制不可选择。
+   2.3  只有当出现"("我们才能选择")",类似2.1的限制，否则无法配对。
+
+3. 基于2的限制条件我们选择用左括号驱动右括号，使用"unUsedLeft"标记未使用的"("的数量，使用"needRight"标记需要右括号的数量。
+
+4. 得到结果的条件:即我们的"("使用完unUsedLeft=0,且对")"的需求needRight=0,此时所有的括号刚好配对,且把2*n个位置占满。
+
+![D\[O{C52PF380BPS}{KX8QBE.png](https://pic.leetcode.cn/1692088277-JvsMvO-D%5BO%7BC52PF380BPS%7D%7BKX8QBE.png)
+
+* 
+
+```
+class Solution {
+    static char[] chars = new char[]{'(', ')'};
+
+    public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<>();
+        traverse(list, new StringBuilder(), 0, n);
+        return list;
+    }
+
+    public void traverse(List<String> list, StringBuilder builder, int needRight, int unUsedLeft) {
+        //左括号使用完且对右括号需求为0得到答案
+        if (unUsedLeft == 0 && needRight == 0) {
+            list.add(builder.toString());
+            return;
+        }
+        for (char ch : chars) {
+            //需要左括号,不需要右括号,右括号的需求通过左括号触发
+            if (needRight == 0 && ch == ')') {
+                continue;
+            }
+            if (unUsedLeft == 0 && ch == '(') {
+                //左括号使用完
+                continue;
+            }
+            if (ch == ')') {
+                //选择右括号，对右括号的需求-1
+                needRight--;
+            } else {
+                //选择左括号对左括号的数量-1,同时对右括号的需求数+1
+                unUsedLeft--;
+                needRight++;
+            }
+            //选择
+            builder.append(ch);
+            //dfs
+            traverse(list, builder, needRight, unUsedLeft);
+            //撤销
+            builder.deleteCharAt(builder.length() - 1);
+            //撤销选择后针对选择的符号对unUsedLeft和needRight计数器还原
+            if (')' == ch) {
+                needRight++;
+            } else {
+                unUsedLeft++;
+                needRight--;
+            }
+        }
+    }
+}
+```
+
