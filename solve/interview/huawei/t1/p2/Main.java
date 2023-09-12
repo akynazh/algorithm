@@ -1,4 +1,4 @@
-package interview.huawei.p2;
+package interview.huawei.t1.p2;
 
 import java.util.*;
 

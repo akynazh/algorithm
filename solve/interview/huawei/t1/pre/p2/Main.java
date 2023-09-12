@@ -1,4 +1,4 @@
-package interview.huawei.pre.p2;
+package interview.huawei.t1.pre.p2;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package interview.huawei.p1;
+package interview.huawei.t1.p1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
