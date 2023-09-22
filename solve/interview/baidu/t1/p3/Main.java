@@ -1,4 +1,4 @@
-package interview.baidu.p3;
+package interview.baidu.t1.p3;
 
 import java.util.Scanner;
 

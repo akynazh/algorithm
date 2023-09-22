@@ -1,4 +1,4 @@
-package interview.baidu.p1;
+package interview.baidu.t1.p1;
 
 import java.util.*;
 
