@@ -1,7 +1,0 @@
-Sample Input
-
-A:FB;B:GC;D:GC;F:AGH;E:HD
-#
-
-Sample Output
-A B C F G D H E -> 3
