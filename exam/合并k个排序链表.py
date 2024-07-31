@@ -1,4 +1,6 @@
 """
+jobright
+
 合并k个排序链表 · Merge K Sorted Lists
 
 描述
@@ -18,41 +20,41 @@ lists = [2->6->null,5->null,7->null]
 """
 
 
-class Node:
+class ListNode:
     def __init__(self, v: int) -> None:
-        self.v = v
+        self.val = v
         self.next = None
 
 
-def solve(lst) -> Node:
-    if not lst:
+def solve(lists) -> ListNode:
+    if not lists:
         return
-    res = Node(0)
+    res = ListNode(0)
     root = res
-    c = len(lst)
+    c = len(lists)
     while c > 0:
         m = 0x7F7F7F7F
         idx = -1
-        for i in range(len(lst)):
-            node = lst[i]
-            if node and node.v < m:
+        for i in range(len(lists)):
+            node = lists[i]
+            if node and node.val < m:
                 idx = i
-                m = node.v
+                m = node.val
         if idx >= 0:
-            lst[idx] = lst[idx].next
-            if not lst[idx]:
+            lists[idx] = lists[idx].next
+            if not lists[idx]:
                 c -= 1
-            res.next = Node(m)
+            res.next = ListNode(m)
             res = res.next
     return root.next
 
 
-h = Node(1)
-h.next = Node(2)
-h.next.next = Node(3)
-h1 = Node(0)
-h1.next = Node(4)
+h = ListNode(1)
+h.next = ListNode(2)
+h.next.next = ListNode(3)
+h1 = ListNode(0)
+h1.next = ListNode(4)
 res = solve([h, h1])
 while res:
-    print(res.v)
+    print(res.val)
     res = res.next
