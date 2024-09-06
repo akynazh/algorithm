@@ -8,13 +8,14 @@
 # @lc code=start
 class Solution:
     def calculate(self, s: str) -> int:
+        s = s.replace(" ", "")
         n = len(s)
         stack = []
         preSign = "+"
         num = 0
         for i in range(n):
-            if s[i] != " " and s[i].isdigit():
-                num = num * 10 + ord(s[i]) - ord("0")
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
             if i == n - 1 or s[i] in "+-*/":
                 if preSign == "+":
                     stack.append(num)
