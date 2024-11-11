@@ -1,48 +1,44 @@
 """
-1. 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
+迷宫可达算法
 
-注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
 
-示例1：输入：nums = [10,2]输出："210"
-
-示例2：输入：nums = [3,30,34,5,9]输出："9534330"
 """
 
-from functools import cmp_to_key
+
+#
+# Note: 类名、方法名、参数名已经指定，请勿修改
+#
+#
+#
+# @param generated_map int整型 二维数组
+# @return int整型
+#
+class Solution:
+    def apply(self, generated_map):
+        n = len(generated_map)
+        vis = [[0] * n for _ in range(n)]
+        vis[0][0] = 1
+        ans = 1
+        q = []
+        q.append((0, 0))
+        while len(q) != 0:
+            xy = q.pop(0)
+            x, y = xy[0], xy[1]
+            a, b = [0, 1, -1, 0], [1, 0, 0, -1]
+            for i in range(4):
+                x1, y1 = x + a[i], y + b[i]
+                if (
+                    x1 >= 0
+                    and x1 < n
+                    and y1 >= 0
+                    and y1 < n
+                    and vis[x1][y1] != 1
+                    and generated_map[x1][y1] != 1
+                ):
+                    vis[x1][y1] = 1
+                    q.append((x1, y1))
+                    ans += 1
+        return n * n - ans
 
 
-def get_arr(num):
-    arr = []
-    while num != 0:
-        arr.append(num % 10)
-        num //= 10
-    arr.reverse()
-    return arr
-
-
-def cmp(v1, v2):
-    if v1 == v2:
-        return 0
-    v1_arr, v2_arr = get_arr(v1), get_arr(v2)
-    n1, n2 = len(v1_arr), len(v2_arr)
-    i = 0
-    while i < n1 and i < n2:
-        if v1_arr[i] > v2_arr[i]:
-            return -1
-        elif v1_arr[i] < v2_arr[i]:
-            return 1
-        i += 1
-    if i == n1 and v1_arr[0] < v2_arr[i]:
-        return 1
-    elif i == n2 and v2_arr[0] < v1_arr[i]:
-        return -1
-    else:
-        return 0
-
-
-def solve(nums):
-    nums = sorted(nums, key=cmp_to_key(cmp))
-    return "".join([str(s) for s in nums])
-
-
-print(solve([10, 2]))
+# Solution().apply([[0, 1, 1, 0], [1, 0, 0, 0], [0, 1, 0, 1], [0, 1, 1, 0]])
