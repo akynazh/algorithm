@@ -17,5 +17,8 @@ def dfs(lst, vis, res):
 
 
 def solve(lst):
-    vis = [0 for _ in range(lst)]
+    vis = [0 for _ in range(len(lst))]
     dfs(lst, vis, "")
+
+
+solve("tesla")
